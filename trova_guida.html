@@ -234,7 +234,7 @@
             filteredGuides.forEach(guide => {
                 var newRow = $('<tr></tr>');
                 Object.values(guide).forEach(value => {
-                    newRow.append($('<td></td>').text(value));
+                    newRow.append($('<td></td>').html(value));
                 });
                 table.append(newRow);
             });
