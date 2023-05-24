@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cerca e Trova Guide Cicloturistiche FCI</title>
     <meta name="description" content="Trova facilmente guide cicloturistiche FCI in Italia. Cerca e scopri guide qualificate per le tue avventure ciclistiche.">
     <meta name="keywords" content="cerca, trova, guide, cicloturistiche, FCI, Italia, ciclismo, cicloturismo">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
 			font-family: Arial, sans-serif;
@@ -100,7 +100,7 @@
     <form id="searchForm" onsubmit="searchGuides(); return false;">
         <!-- Campo di ricerca per parametro -->
         <label for="searchInput">Inserisci il parametro di ricerca:</label>
-        <input type="text" id="searchInput" name="strng" size="" placeholder="nome, mail, telefono, area di competenza, regione, provincia" size="50%" required>
+        <input type="text" id="searchInput" name="strng" placeholder="nome, mail, telefono, area di competenza, regione, provincia" size="50%" required>
         <button type="submit">Cerca</button>
     </form>
 
@@ -144,31 +144,30 @@
 		</select>
         <button onclick="filterByRegion();">Filtra</button>
     </div>
-	
-	<div class="modal fade" id="modalContent" tabindex="-1" aria-labelledby="modalContentLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title" id="modalContentLabel">Note</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-			<p id="noteContent"></p>
-		  </div>
-		</div>
-	  </div>
-	</div>
+    
+    <div class="modal fade" id="modalContent" tabindex="-1" aria-labelledby="modalContentLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalContentLabel">Note</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="noteContent"></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
-	
-		// Clona l'elemento di input
-		var filterRegionInput = document.getElementById("regionFilter");
-		var clonedInput = filterRegionInput.cloneNode(true);
-
-		// Inserisci l'elemento clonato all'inizio del tuo HTML
-		var tableContainer = document.getElementById("guidesTable");
-		tableContainer.insertAdjacentElement("beforebegin", clonedInput);
-	
+        // Clona l'elemento di input
+        var filterRegionInput = document.getElementById("regionFilter");
+        var clonedInput = filterRegionInput.cloneNode(true);
+        
+        // Inserisci l'elemento clonato all'inizio del tuo HTML
+        var tableContainer = document.getElementById("guidesTable");
+        tableContainer.insertAdjacentElement("beforebegin", clonedInput);
+    
         var guidesData = []; // Array per memorizzare i dati delle guide
 
         function searchGuides() {
@@ -200,7 +199,7 @@
                             area: cells[3].textContent.trim(),
                             regione: cells[4].textContent.trim(),
                             provincia: cells[5].textContent.trim(),
-                            note: cells[6].querySelector('a')
+                            note: '<a href="'+cells[6].querySelector('a')+'" class="note-link" data-toggle="modal" data-target="#modalContent">Leggi Note</a>'
                         };
                         guidesData.push(guide);
 
@@ -240,8 +239,8 @@
                 table.append(newRow);
             });
         }
-		
-		// Aggiungi un gestore di eventi al clic sul link "Leggi Note"
+        
+        // Aggiungi un gestore di eventi al clic sul link "Leggi Note"
 		$('#guidesTable').on('click', '.note-link', function(event) {
 			event.preventDefault();
 			var noteLink = $(this);
@@ -257,13 +256,13 @@
 			});
 			return false;
 		});
-		
-		// Chiudi il modale quando viene cliccato sul pulsante di chiusura
+        
+        // Chiudi il modale quando viene cliccato sul pulsante di chiusura
 		$('#modalContent').on('hidden.bs.modal', function () {
 		  var noteContentElement = document.getElementById("noteContent");
 		  noteContentElement.textContent = '';
 		});
-
+        
     </script>
 </body>
 </html>
